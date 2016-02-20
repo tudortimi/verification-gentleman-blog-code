@@ -1,7 +1,5 @@
 */transcript
 */work
-.project
-.dvt
 *.log
 *.elog
 .__testsuite.sv
