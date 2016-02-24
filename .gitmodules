@@ -1,0 +1,3 @@
+[submodule "uvm_end_of_test/dependencies/amiq_apb"]
+	path = uvm_end_of_test/dependencies/amiq_apb
+	url = https://github.com/amiq-consulting/amiq_apb.git

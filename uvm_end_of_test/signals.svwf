@@ -1,0 +1,74 @@
+
+#
+# Mnemonic Maps
+#
+mmap new -reuse -name {Boolean as Logic} -radix %b -contents {{%c=FALSE -edgepriority 1 -shape low}
+{%c=TRUE -edgepriority 1 -shape high}}
+mmap new -reuse -name {Example Map} -radix %x -contents {{%b=11???? -bgcolor orange -label REG:%x -linecolor yellow -shape bus}
+{%x=1F -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=2C -bgcolor red -label ERROR -linecolor white -shape EVENT}
+{%x=* -label %x -linecolor gray -shape bus}}
+
+array unset createdGroup
+array set createdGroup {}
+#
+# Groups
+#
+if {[catch {group get -using [list North]}]} {
+set createdGroup([list North]) 1
+catch {group new -name North -overlay 0}
+}
+if {[catch {group get -using [list South]}]} {
+set createdGroup([list South]) 1
+catch {group new -name South -overlay 0}
+}
+if {[info exists createdGroup([list North])]} {
+group using North
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+group insert \
+    [subst  {[format {top.north_if.sel[0:0]}]} ] \
+    [subst  {[format {top.north_if.enable}]} ] \
+    [subst  {[format {top.north_if.write}]} ] \
+    [subst  {[format {top.north_if.addr[31:0]}]} ] \
+    [subst  {[format {top.north_if.wdata[31:0]}]} ] \
+    [subst  {[format {top.north_if.ready}]} ] \
+    [subst  {[format {top.north_if.slverr}]} ] \
+    [subst  {[format {top.north_if.rdata[31:0]}]} ] \
+    [subst  {[format {top.north_if.strb[4:0]}]} ] \
+    [subst  {[format {top.north_if.prot[2:0]}]} ]
+}
+
+if {[info exists createdGroup([list South])]} {
+group using South
+group set -overlay 0
+group set -comment {}
+group clear 0 end
+group insert \
+    [subst  {[format {top.south_if.sel[0:0]}]} ] \
+    [subst  {[format {top.south_if.enable}]} ] \
+    [subst  {[format {top.south_if.write}]} ] \
+    [subst  {[format {top.south_if.addr[31:0]}]} ] \
+    [subst  {[format {top.south_if.wdata[31:0]}]} ] \
+    [subst  {[format {top.south_if.ready}]} ] \
+    [subst  {[format {top.south_if.slverr}]} ] \
+    [subst  {[format {top.south_if.rdata[31:0]}]} ] \
+    [subst  {[format {top.south_if.strb[4:0]}]} ] \
+    [subst  {[format {top.south_if.prot[2:0]}]} ]
+}
+
+set id [waveform add -signals [subst  {
+	{[format {top.north_if.reset_n}]}
+	} ]]
+set id [waveform add -signals [subst  {
+	{[format {top.north_if.clk}]}
+	} ]]
+
+set groupId0 [waveform add -groups North]
+
+
+set groupId0 [waveform add -groups South]
+
+
+waveform xview limits 0 41ns

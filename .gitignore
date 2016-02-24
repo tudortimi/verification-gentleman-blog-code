@@ -1,7 +1,15 @@
 */transcript
 */work
 *.log
+
 *.elog
+
+waves.shm
+INCA_libs
+irun.history
+irun.key
+.simvision
+
 .__testsuite.sv
 .svunit.f
 .testrunner.sv
