@@ -13,7 +13,7 @@
 // limitations under the License.
 
 
-class filter_sequence extends amiq_apb_master_base_seq;
+class pipeline_sequence extends amiq_apb_master_base_seq;
   virtual task body();
     amiq_apb_master_simple_seq write_seq;
     `uvm_do_with(write_seq, {
@@ -22,9 +22,9 @@ class filter_sequence extends amiq_apb_master_base_seq;
     })
   endtask
 
-  function new(string name = "filter_sequence");
+  function new(string name = "pipeline_sequence");
     super.new(name);
   endfunction
 
-  `uvm_object_utils(apb_pipeline_tb::filter_sequence)
+  `uvm_object_utils(apb_pipeline_tb::pipeline_sequence)
 endclass

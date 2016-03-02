@@ -33,8 +33,8 @@ class test extends uvm_test;
 
 
   virtual task run_phase(uvm_phase phase);
-    apb_pipeline_tb::filter_sequence seq =
-      apb_pipeline_tb::filter_sequence::type_id::create("seq", this);
+    apb_pipeline_tb::pipeline_sequence seq =
+      apb_pipeline_tb::pipeline_sequence::type_id::create("seq", this);
 
     phase.raise_objection(this);
 
